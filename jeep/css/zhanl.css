@@ -1,0 +1,148 @@
+    * {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      /* background-color: #0000; */
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    #modoll{
+      width: 94%;
+      height: 88%;
+      /* background-color: #9BCD9B; */
+    }
+    /* #modoll div{
+      margin-bottom:  0.5%;
+    }*/
+    .hred{
+      position: absolute;
+      width: 100%;
+      height: 32%;
+      background-color: #0F0F0F;
+      /* border: 1px solid red; */
+    }
+    .hred .tu1{
+      width: 50%;
+      position: absolute;
+      background: url('../images/buying/1.png')no-repeat center center;
+      background-size:100% 100%;
+      /* background-color: red; */
+    }
+    .hred .tu2{
+      left: 45%;
+      width: 55%;
+      position: absolute;
+      background: url('../images/buying/11.png')no-repeat center center;
+      background-size: 100% 100%;
+      /* background-color: red; */
+    }
+    .hred2{
+      position: absolute;
+      top: 34%;
+      width: 100%;
+      height: 32%;
+      background-color: #0F0F0F;
+      /* border: 1px solid yellow; */
+    }
+    .hred2 .tu1{
+      width: 60%;
+      position: absolute;
+      background: url('../images/buying/22.png')no-repeat center center;
+      background-size:100% 100%;
+      /* background-color: red; */
+    }
+    .hred2 .tu2{
+      left: 60%;
+      width: 40%;
+      position: absolute;
+      background: url('../images/buying/2.png')no-repeat center center;
+      background-size: 100% 100%;
+      /* background-color: red; */
+    }
+    .hred3{
+      position: absolute;
+      top: 68%;
+      width: 100%;
+      height: 32%;
+      background-color:#0F0F0F;
+      /* border: 1px solid #fff; */
+    }
+    .hred3 .tu1{
+      width: 45%;
+      position: absolute;
+      background: url('../images/buying/3.png')no-repeat center center;
+      background-size:100% 100%;
+      /* background-color: red; */
+    }
+    .hred3 .tu2{
+      left: 45%;
+      width: 55%;
+      position: absolute;
+      background: url('../images/buying/33.png')no-repeat center center;
+      background-size: 100% 100%;
+      /* background-color: red; */
+    }
+    #modoll .left{
+        width: 5%;
+        height: 60%;
+        left: 95%; 
+        top: 20%;
+        /* background-color: red; */
+    }
+    #modoll .left img{
+      position: absolute;
+      top:40%;
+      left: -5%;
+      width:120%;
+    }
+    #modoll .right{
+        width: 5%;
+        height: 60%;
+        left: 0%; 
+        top: 25%;
+        /* background-color: red; */
+    }
+    #modoll .right img{
+      position: absolute;
+      width: 120%;
+      left: -15%; 
+      top: 35%;
+      transform: rotate(180deg);
+    }

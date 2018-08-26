@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>zhi_24L</title>
+	<!-- <link rel="stylesheet" href="../../css/cs.css"> -->
+	<script src="../../js/rem.js"></script>
+	<script type="text/javascript">
+		var browser = {
+			versions: function () {
+				var u = navigator.userAgent, app = navigator.appVersion;
+				return { //移动终端浏览器版本信息 
+					ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端 
+					android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或uc浏览器 
+					iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器 
+					iPad: u.indexOf('iPad') > -1, //是否iPad 
+				};
+			}(),
+		};
+		if (browser.versions.iPhone || browser.versions.iPad || browser.versions.ios) {
+			// alert(456);
+			document.write('<link rel="stylesheet" type="text/css" href="../css/c_pg.css"/>');
+		}
+		if (browser.versions.android) {
+			// alert(123);
+			document.write('<link rel="stylesheet" type="text/css" href="../css/c_az.css"/>');
+		}
+	</script>
+</head>
+<body class="index-bg">
+<div class="index-box">
+	<div class="banner">
+		<div class="hd">
+			<div class="top fix">
+			<div class="logo"></div>
+			<div class="fr-ico"></div>
+			</div>
+			<div class="hd_two">
+			</div>
+			<div class="hd_therr">
+			</div>
+		</div>
+	</div>
+	<div class="index-bottom">
+		<div class="hd_four">
+			<img src="../../image/臻享保养套餐/臻享保养套餐-指南者2.4L/1.png">
+		</div>
+		<div class="kuan">
+			<img src="../../image/臻享保养套餐/臻享保养套餐-指南者2.4L/2.png" alt="">
+		</div>
+		<div class="modl">
+			<img src="../../image/臻享保养套餐/3.png" alt="">
+			<a href="../弹窗/goum.html" class="dj">
+			</a>
+		</div>
+		<div class="left"></div>
+		<div class="right"></div>
+
+		<div class="bottom-bg">
+			<div class="zhuyi">
+				
+			</div>
+		</div>
+	</div>
+	<script src="../../js/jquery.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</div>
+</body>
+</html>

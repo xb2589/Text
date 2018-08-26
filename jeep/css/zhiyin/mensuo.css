@@ -1,0 +1,75 @@
+* {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+      font-size: 100px;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    #bj{
+      overflow: auto;
+      background: url('../../images/zhiyin/阅读灯-天窗控制bj.jpg')no-repeat center center;
+      background-size:100% 100%;
+      /* background-size: 100% 100%; */
+      /* transform: rotate(90deg);  */
+    }
+     #bj .home{
+        position: absolute;
+        width: 9%;
+        height: 16%;
+        left: 5%; 
+        top: 10%;
+        overflow: auto;
+        background: url('../../images/zhiyin/home.png')no-repeat center center;
+        background-size:100% auto;
+        /* border: 1px solid red; */
+    }
+    #bj .model{
+      position: absolute;
+      width:100%;
+      height: 100%;
+      overflow: auto;
+      background: url('../../images/mensuo/13-车窗及电动门锁控制.png')no-repeat center center;
+      background-size: cover;
+      /* background-size:100% auto; */
+      /* border: 1px solid red; */
+    }

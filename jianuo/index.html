@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/head.css">
+	<script>
+    function reCalcRem() {
+      var $html = document.documentElement;
+      $html.style.fontSize = ($html.getBoundingClientRect().width / 750) * 100+ "px";
+    }
+    window.addEventListener('resize', reCalcRem, false);
+    reCalcRem();
+	</script>
+</head>
+<body>
+	<div id="all">
+		<div class="banner">
+			<div class="head">
+				<div class="hd1"></div><div class="hd2"></div>
+			</div>
+		</div>
+		<div class="middle">
+			<div class="md_head">
+				<a href="#" class="md_head_top cont"></a>
+				<a href="#" class="md_head_bottom cont"></a>
+			</div>
+			<div class="seller"></div>
+			<ul>
+				<li class="li1"><a href="#"></a></li>
+				<li class="li2"><a href="#"></a></li>
+				<li class="li3"><a href="#"></a></li>
+			</ul>
+			<a class="discounts" href="#"></a>
+		</div>
+	</div>
+	<div class="bottom"></div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<!--跳转页面的链接-->
+	<script type="text/javascript" src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>叶落非殇</title>
+	<style>
+		#view {
+			font-size: 40px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<button>点击</button>
+    <script type="text/javascript" src="js/jquery.js"></script>
+	<script>
+		 /*  获取图片的base64码
+        * @param {obj}img图片dom对象
+         * */
+         (function () {
+         	var audio = document.createElement('audio');
+			var source = document.createElement('source');
+
+			source.type = "audio/mpeg";
+			source.src = "http://39.107.109.20:8080/jeep/audio/1-启动汽车.mp3";
+			source.autoplay = "autoplay";
+			source.controls = "controls";
+			audio.appendChild(source);
+			$("button").click(function(){
+				audio.play();
+			})
+         })();
+        
+	</script>
+</body>
+</html>

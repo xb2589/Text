@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>指引页</title>
+  <meta name="viewport" content="width=width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="css/zhiyin.css">
+</head>
+<body>
+    <div id="jb">
+        <div class="tp">
+            <img class="se1" src="images/zhiyin/1.jpg" />
+            <img class="se2" src="images/zhiyin/jb3.png" />
+            <img class="se3" src="images/zhiyin/jb4.png" />
+        </div>
+        <div class="hep">
+        	<a href="zhiyin/yd.html" class="ca1"></a>
+        	<a href="zhiyin/chechuang.html" class="ca2"></a>
+        	<a href="zhiyin/yibiao.html" class="ca3"></a>
+        	<a href="zhiyin/yule.html" class="ca4"></a>
+        	<a href="zhiyin/fxp.html" class="ca5"></a>
+        	<a href="zhiyin/yusha.html" class="ca6"></a>
+        	<a href="zhiyin/kongtiao.html" class="ca7"></a>
+        	<a href="zhiyin/mensuo.html" class="ca8"></a>
+        	<a href="zhiyin/fuzhu.html" class="ca9"></a>
+        	<a href="zhiyin/zuoyi.html" class="ca10"></a>
+        	<a href="zhiyin/xinche.html" class="ca11"></a>
+        	<a href="zhiyin/qd_js.html" class="ca12"></a>
+        	<a href="zhiyin/guzhang.html" class="ca13"></a>
+        </div>
+        <div class="right">
+          <img src="images/right.png">
+        </div>
+   </div>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/luenbo.js"></script>
+  <script>
+  (function () {
+    $("#jb").fadeIn(3000,function(){
+        $(".se1").fadeIn(3000,function(){
+            $(".se2").fadeIn(2000,function(){
+                 $(".se3").fadeIn(2000,function(){
+                    // window.location.href="3.html";
+                    // $("#jb").attr("style","display:none");
+                    $("#qx").attr("style","display:block");
+                 });
+            });
+        });
+    });
+    $(".right img").click(function(){
+      window.location.href="4.html";
+    })
+  })();
+  </script>
+</body>
+</html>

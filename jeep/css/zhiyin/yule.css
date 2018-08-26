@@ -1,0 +1,141 @@
+ * {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+      font-size: 100px;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    ul{
+      list-style: none;
+    } 
+    .banner{
+      /* width:100vw;
+      height: 55vw; */
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner .img{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0
+    } 
+    .img li{
+      /* position: absolute; */
+      float: left;
+      /* width:100%; */
+      height:100%;
+     } 
+    .img li img{
+      position: relative;
+      width: 13rem;
+      height: 7.5rem;
+    }
+    /*  @media screen and (max-height: 600px) {
+      .img li img{
+        position: relative;
+        width:160vw; 
+        height:100%;
+      } 
+    }  */
+    #bj{
+      overflow: auto;
+      background: url('../../images/zhiyin/阅读灯-天窗控制bj.jpg')no-repeat center center;
+      background-size:100% 100%;
+      /* background-size: 100% 100%; */
+      /* transform: rotate(90deg);  */
+    }
+     #bj .home{
+        position: absolute;
+        width: 9%;
+        height: 16%;
+        left: 5%; 
+        top: 10%;
+        overflow: auto;
+        background: url('../../images/zhiyin/home.png')no-repeat center center;
+        background-size:100% auto;
+        /* border: 1px solid red; */
+    }
+    #bj .kz{
+      position: absolute;
+      width: 20%;
+      height: 16%;
+      left: 75%; 
+      top: 9%;
+      overflow: auto;
+      background: url('../../images/fxp/fxp.png')no-repeat center center;
+      background-size:100% auto;
+      /* border: 1px solid red; */
+    }
+    .banner .left{
+      position: absolute;
+      width: 6%;
+      height: 80%;
+      top: 10%;
+      left: 94%;
+      /* background-color: red; */
+    }
+    .banner .left img{
+      position: absolute;
+      top:50%;
+      left: -5%;
+      width:120%;
+    }
+    .banner .right{
+      position: absolute;
+      width: 6%;
+      height: 80%;
+      top: 10%;
+      /* left: 94%; */
+      /* background-color: red; */
+    }
+    .banner .right img{
+      position: absolute;
+      top:50%;
+      left: -5%;
+      width:120%;
+      transform: rotate(180deg);
+    }

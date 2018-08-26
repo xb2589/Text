@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dao.TMessageDao">
+
+	<resultMap type="tmessage" id="rmtmessage">
+		<id property="tMid" column="tMid"/>
+		<result property="cFriendsId" column="cFriendsId"/>
+		<result property="userId" column="userId"/>
+		<result property="tMcontent" column="tMcontent"/>
+		<result property="user" column="user"/>
+		<collection property="reverts" column="tMid" select="com.dao.RevertDao.selectById" javaType="List" ofType="revert">
+			<id property="reId" column="reId"/>
+			<result property="ruerId" column="ruserId"/>
+			<result property="tMid" column="tMid"/>
+			<result property="rMrevert" column="rMrevert"/>
+			<result property="ruser" column="ruser"/>
+			<result property="rmuserId" column="rmuserId"/>
+			<result property="rmuser" column="rmuser"/>
+		</collection>
+	</resultMap>
+
+
+	<!-- 新增评论 -->
+	<insert id="insertMessage" parameterType="tmessage" useGeneratedKeys="true" keyProperty="tMid">
+		insert into tmessage values (default,#{cFriendsId},#{userId},#{tMcontent},#{user})
+	</insert>
+	
+	<!-- 查询评论 -->
+	<select id="selectMessage" parameterType="tmessage" resultMap="rmtmessage">
+		select * from tmessage where cFriendsId = #{cFriendsId}
+	</select>
+</mapper>

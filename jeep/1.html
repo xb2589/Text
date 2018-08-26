@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style type="text/css">
+    * {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      /* background-color: #F00; */
+      position: fixed;
+      /* position: relative; */
+      height: 100%;
+      width: 100%;
+    }
+    /* div:nth-of-type(1){
+      top: 0;
+      left: 0;
+    }
+    div:nth-of-type(2){
+      top: 0;
+      right: 0;
+
+    }
+    div:nth-of-type(3){
+      bottom: 0;
+      left: 0;
+    }
+    div:nth-of-type(4){
+      bottom: 0;
+      right: 0;
+    } */
+    #bj{
+      background: url('images/1.jpg');
+      background-repeat:repeat-x; 
+      background-size: cover;
+      background-position: 0 0; 
+      /* transform: rotate(90deg);  */
+    }
+    .modol{
+      position: absolute;
+      left: 3rem;
+      top:40%;
+      width: 30%;
+      height: 20%;
+      background:red;
+      /* margin-left: 3rem;
+      width: 25%;
+      height: 20%;
+      background-color: red; */
+    }
+    .modol .qd{
+      position: absolute;
+      width: 36%;
+      height: 80%;
+      margin-top: 5%;
+      background: url('images/images/qd.png');
+      background-size: 100% 100%;
+      z-index: 999;
+      background-color: yellow;
+    }
+    .modol .che{
+      position: absolute;
+      width:65%;
+      height: 75%;
+      margin-left: 39%;
+      margin-top: 5%;
+      background: url('images/images/che.png');
+      background-size: cover;
+      /* background-color: yellow; */
+    }
+    #jb{
+        background-color: red;
+        display: none;
+    }
+    #jb.tp{
+        margin:0 auto;
+        background-color: yellow;
+        z-index: 99;
+    }
+    .tp img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    .se2{
+        display:none;
+    }
+    .se3{
+        display:none;
+    }
+    .se22{
+       display:none;
+    }
+    .se32{
+       display:none;
+    }
+    .se34{
+       display:none;
+    }
+  </style>
+</head>
+<body>
+  <div id="bj">
+    <div class="modol">
+      <div class="qd"></div>
+      <div class="che"></div>
+      <audio id="start_up" controls="controls" autoplay="autoplay" style="display: none">
+        <source src="audio/1-启动汽车.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="Brisk" controls="controls" autoplay="autoplay" style="display: none">
+        <source src="audio/汽车背景音乐.mp3" type="audio/mpeg" />
+      </audio>
+      <audio id="ether" controls="controls" autoplay="autoplay" style="display: none">
+        <source src="audio/4-大气背景音乐-4.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+  <div id="jb">
+        <div class="tp">
+            <img class="se1" src="images/images/bj.png" />
+            <img class="se11" src="images/images/1.png">
+            <img class="se22" src="images/images/22.png"/>
+            <img class="se2" src="images/images/2.png" />
+            <img class="se32" src="images/images/32.png"/>
+            <img class="se3" src="images/images/33.png" />
+            <img class="se34" src="images/images/34.png" />
+        </div>
+   </div>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script>
+    (function () {
+        //横屏
+      function resize() {
+        var body = document.getElementsByTagName('body')[0];
+        var html = document.getElementsByTagName('html')[0];
+        var width = html.clientWidth;
+        var height =  html.clientHeight;
+        var max = width > height ? width : height;
+        var min = width > height ? height : width;
+        body.style.width = max + "px";
+        body.style.height = min + "px";
+      }
+      resize();
+    //启动音乐
+    function play2() {
+        var music = document.getElementById('start_up');
+        if(music.paused){
+            music.play();
+            setTimeout(function () {   
+               music.pause();
+            },3500);
+            setTimeout(function () {
+               str();  
+            },3600);
+        }else{
+            music.pause();
+        }
+    }
+    //汽车移动和渐变
+    function str(){
+        //轻快音乐
+        var music = document.getElementById('Brisk');
+        if(music.paused){
+            music.play();
+        }else{
+            music.pause();
+        }
+        var tiems=0;
+        var n=1;
+          sst=setInterval(function(){
+              bj.style.backgroundPosition=--n+"px";
+              tiems+=1;
+              if(tiems ===2200){
+                //结束轻快音乐
+                music.pause();
+                //轻快音乐
+                var music2 = document.getElementById('ether');
+                if(music2.paused){
+                    music2.play();
+                }else{
+                    music2.pause();
+                }
+                clearInterval(sst);
+                $("#bj").fadeOut(3000);
+                $("#jb").fadeIn(3000,function(){
+                  $(".se1").fadeIn(3000,function(){
+                    $(".se22").fadeIn(2000);
+                      $(".se2").fadeIn(2000,function(){
+                        $(".se32").fadeIn(2000);
+                          $(".se3").fadeIn(2000,function(){
+                            $(".se34").fadeIn(1000,function(){
+                            	setTimeout(function () { window.location.href="3.html";  
+					            },2000);
+                               
+                            });
+                           });
+                      });
+                  });
+              });
+                
+              }
+          },-100);
+    }
+    //点击事件
+    $(".qd").click(function(){
+        play2();
+        // setInterval(play2,2000);
+        // setTimeout(code,millisec)
+        // str();
+        $(this).attr("style","display:none");
+    })
+    //跳转页面
+    $(".left img").click(function(){
+        window.location.href="4.html";
+    })
+      window.addEventListener("resize", resize)
+    })();
+  </script>
+</body>
+</html>

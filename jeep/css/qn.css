@@ -1,0 +1,66 @@
+* {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    #qx{
+      overflow: auto;
+      background: url('../images/qn/3.jpg')no-repeat center center;
+      background-size: cover;
+      background-position: 0 0; 
+    }
+    #qx .left{
+        position: absolute;
+        width: 5%;
+        height: 60%;
+        /* background-color: red; */
+        left: 95%; 
+        top: 25%;
+    }
+    #qx .left img{
+      position: absolute;
+      top:40%;
+      left: -5%;
+      width:120%;
+    }

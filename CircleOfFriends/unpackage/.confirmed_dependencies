@@ -1,0 +1,59 @@
+{
+  "login.html": {
+    "resources": [
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "index.html",
+      "register.html"
+    ]
+  },
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/jquery.min.js",
+      "css/mui.css",
+      "index.html",
+      "pullrefresh_sub.html"
+    ],
+    "refer": [
+      "upload.html",
+      "index.html",
+      "forward.html",
+      "pullrefresh_sub.html"
+    ]
+  },
+  "register.html": {
+    "resources": [
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "login.html",
+      "index.html"
+    ]
+  },
+  "upload.html": {
+    "resources": [
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  },
+  "pullrefresh_sub.html": {
+    "refer": [
+      "index.html"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dao.ThumbDao">
+
+	<resultMap type="thumb" id="rmthumb">
+		<result column="count" property="count"/>
+	</resultMap>
+	
+	<!-- 点赞  -->
+	<insert id="giveStart" useGeneratedKeys="true" keyProperty="thumbId" parameterType="thumb">
+		insert into thumb values(default,#{cFriendsId},#{userId},#{user})
+	</insert>
+	
+	<!-- 所有点赞的人  -->
+	<select id="whoThumb"  resultMap="rmthumb" parameterType="thumb">
+		select * from thumb where cFriendsId = #{cFriendsId}
+	</select>
+	
+	<delete id="deleteDZ" >
+		delete from thumb where cFriendsId =#{cFriendsId} and user =#{user}
+	</delete>
+	
+</mapper>

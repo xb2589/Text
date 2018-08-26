@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
+</head>
+<link rel="stylesheet" type="text/css" href="css/hoem.css">
+<body>
+	<div class="molled">
+		<div class="head">
+			<span>10%</span>
+			<div class="kong">
+				<div class="dh"></div>
+			</div>
+		</div>
+		<div class="tp">
+			<span class="tp1">全新 <b>Jeep</b> 大指挥官</span><br>
+			<span class="tp2">即将呈现</span>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script src="http://cdnjs.gtimg.com/cdnjs/libs/wxmoment/0.0.2/wxmoment.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		//计算rem的
+	    function reCalcRem() {
+	      var $html = document.documentElement;
+	      $html.style.fontSize = ($html.getBoundingClientRect().width / 750) * 100+ "px";
+	    }
+	    window.addEventListener('resize', reCalcRem, false);
+	    reCalcRem(); 
+
+		var basePath = "";
+		var loader = new WxMoment.Loader();
+		//声明资源文件列表
+		var fileList = [
+		    "images/1.jpg",
+		    "images/images/che.png",
+		    "images/images/qd.png",
+		    "images/qn/3.jpg",
+		    "audio/1-启动汽车副本.mp3",
+		    "audio/小车背景音乐.mp3"
+		];
+		for (var i = 0; i < fileList.length; i++) {
+		   loader.addImage(basePath + fileList[i]);
+		   localStorage.setItem('msg'+i+"", basePath + fileList[i]);
+		}
+		//进度监听
+		loader.addProgressListener(function (e) {
+		   var percent = Math.round((e.completedCount / e.totalCount) * 100);
+		   // alert(percent)s
+		   $(".head span").text(percent+'%');
+		   $(".kong .dh").attr("style","width:"+percent+"%");
+		   // $(".loading_y").css({width:percent+'%'});
+		   //console.log("当前加载了", percent, "%");
+		   //在这里做 Loading 页面中百分比的显示
+		});
+		//加载完成
+		loader.addCompletionListener(function () {
+		   //可以在这里隐藏 Loading 页面开始进入主内容页面
+		//console.log("加载完成");
+		    setTimeout(function(){
+		    window.location.href="2.html"; 
+			},2000);
+		})
+		//启动加载
+		loader.start();	
+	})
+	</script>
+</body>
+</html>

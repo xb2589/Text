@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+		</script>
+		<style type="text/css">
+			#regNow {
+				display: inline-block;
+				text-align: center;
+				width: 100%;
+				line-height: 60px;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">登陆</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>用户名</label>
+					<input type="text" id="name" class="mui-input-clear" placeholder="请输入用户名">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" id="password" class="mui-input-password" placeholder="请输入密码">
+				</div>
+				<div class="mui-button-row">
+					<button type="button" id="login" class="mui-btn mui-btn-primary">确认</button>
+					<button type="button" class="mui-btn mui-btn-danger">取消</button>
+				</div>
+			</form>
+			<a id="regNow">注册 >></a>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/ip.js"></script>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//识别
+			$("#name").blur(function() {
+				var name = document.getElementById("name").value;
+				$.ajax({
+					url: "http://" + ip + ":8080/CircleOfFriends/user/isRepeat.do",
+					type: "post",
+					data: {
+						user: name
+					},
+					dataType: "jsonp", //响应回来的参数类型
+					//timeout://请求超时时间
+					success: function(data) {
+						if(data.code == 100) {
+							mui.alert("用户名不存在,请重新输入！", "尊敬的用户您好！");
+						}
+					}
+				});
+			});
+			mui.plusReady(function() {
+				window.addEventListener("pulldownRefresh", function(e) {
+					location.reload();
+				});
+				
+				//退出
+				mui.oldback = mui.back;
+				var clickNum = 0;
+				mui.back = function(event){
+				   clickNum++;
+				   if(clickNum > 1){
+				       plus.runtime.quit();
+				   }else{
+				       mui.toast("再按一次退出应用");
+				   }
+				   setTimeout(function(){
+				       clickNum = 0
+				   },1000);
+				        return false;
+				}
+				
+				mui('body').on('tap', '#login', function() {
+					var name = document.getElementById("name").value;
+					var password = document.getElementById("password").value;
+					if(name == "") {
+						mui.alert('用户名不能为空哦！', '尊敬的用户，您好！');
+					} else if(password == "") {
+						mui.alert('密码不能为空哦！', '尊敬的用户，您好！');
+					}
+					mui.ajax('http://' + ip + ':8080/CircleOfFriends/user/login.do', {
+						data: {
+							user: name,
+							password: password
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						success: function(data) {
+							//服务器返回响应，根据响应结果，分析是否登录成功；
+							if(data.code == 100) {
+								mui.alert("登陆成功", "尊敬的用户，您好！");
+								mui.openWindow({
+									url: 'index.html',
+									id: 'index',
+									extras: {
+										user: name,
+										userId: data['extend']['userId']
+									}
+								})
+							} else {
+								mui.alert("登陆失败,请重新输入密码哦！", "尊敬的用户，您好！");
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							//异常处理；
+							//							console.log(type);
+						}
+					});
+				})
+
+				mui('body').on('tap', '#regNow', function() {
+					mui.openWindow({
+						url: 'register.html',
+						id: 'register'
+					})
+				})
+			})
+		});
+	</script>
+
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0">
+  <style type="text/css">
+    * {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+    }
+    ul{
+      list-style: none;
+    } 
+    .banner{
+      /* width:100vw;
+      height: 55vw; */
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner .img{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0
+    } 
+    .img li{
+      /* position: absolute; */
+      float: left;
+      /* width:100%; */
+      height:100%;
+     } 
+    .img li img{
+      position: relative;
+      width:190vw; 
+      height:55vw; 
+      /* width:50%; */
+      height:100%;
+    } 
+    #bj{
+      overflow: auto;
+      background: url('../images/zhiyin/阅读灯-天窗控制bj.png')no-repeat center center;
+      background-size:100% 100%;
+      /* background-size: 100% 100%; */
+      /* transform: rotate(90deg);  */
+    }
+     #bj .home{
+        position: absolute;
+        width: 9%;
+        height: 16%;
+        left: 5%; 
+        top: 10%;
+        overflow: auto;
+        background: url('../images/zhiyin/home.png')no-repeat center center;
+        background-size:100% auto;
+        /* border: 1px solid red; */
+    }
+    #bj .kz{
+      position: absolute;
+      width: 20%;
+      height: 16%;
+      left: 75%; 
+      top: 9%;
+      overflow: auto;
+      background: url('../images/zhiyin/yib.png')no-repeat center center;
+      background-size:100% auto;
+      /* border: 1px solid red; */
+    }
+    #bj .model{
+      position: absolute;
+      width:100%;
+      height: 100%;
+      /* left: 70%;  */
+      /* top: 10%; */
+      overflow: auto;
+      /* background: url('../images/zhiyin/仪表和控制01.png')no-repeat center center; */
+      /* background-size:100% auto; */
+      background-size: cover
+      /* border: 1px solid red; */
+    }
+    .banner .left{
+      position: absolute;
+      width: 6%;
+      height: 80%;
+      top: 10%;
+      left: 94%;
+      /* background-color: red; */
+    }
+    .banner .left img{
+      position: absolute;
+      top:50%;
+      left: -5%;
+      width:120%;
+    }
+    .banner .right{
+      position: absolute;
+      width: 6%;
+      height: 80%;
+      top: 10%;
+      /* left: 94%; */
+      /* background-color: red; */
+    }
+    .banner .right img{
+      position: absolute;
+      top:50%;
+      left: -5%;
+      width:120%;
+      transform: rotate(180deg);
+    }
+  </style> 
+        <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script> 
+    </head> 
+<body> 
+  <div id="bj">
+    <div class="banner"> 
+      <ul class="img">
+        <li><img src='../images/yib/2-仪表和控制_01.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_02.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_03.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_04.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_05.png' alt=""></li>
+      </ul>     
+      <div class="left">
+        <img src="../images/fx.png">
+      </div>
+      <div class="right">
+        <img src="../images/fx.png">
+      </div>
+    </div>
+    <a href="../6.html" class="home"></a>
+    <div class="kz"></div>
+  </div>
+<!--     <div class="banner"> 
+      <ul class="img">
+        <li><img src='../images/yib/2-仪表和控制_01.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_02.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_03.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_04.png' alt=""></li>
+        <li><img src='../images/yib/2-仪表和控制_05.png' alt=""></li>
+      </ul> 
+      <div class="btn"> 
+        <span class="prev"><</span> 
+        <span class="next">></span> 
+      </div>      
+    </div>  -->        
+    </body>         
+  <script>                   
+    $(function(){                   
+      var i=0; 
+      var timer=null; 
+     
+      var firstimg=$('.img li').first().clone(); //复制第一张图片 
+      $('.img').append(firstimg).width($('.img li').length*($('.img img').width())); //将第一张图片放到最后一张图片后，设置ul的宽度为图片张数*图片宽度 
+
+      //判断左右滑动切换 
+          $('.img').on("touchstart", function(e) { 
+      //e.preventDefault(); 
+          startX = e.originalEvent.changedTouches[0].pageX; 
+      //e.stopPropagation(); 
+          return false; 
+          });
+          /*向左按钮*/
+           $(".banner .left").click(function(){
+               clearInterval(timer); 
+                i--; 
+                if (i==-1) { 
+                  i=$('.img li').length-2; 
+                  $('.img').css({left:-($('.img li').length-1)*$('.img img').width()}); 
+                } 
+                $('.img').stop().animate({left:-i*$('.img img').width()},300); 
+                $('.num li').eq(i).addClass('active').siblings().removeClass('active');     
+           })
+           /*向右按钮*/
+           $(".banner .right").click(function(){
+               clearInterval(timer); 
+                i++; 
+                if (i==$('.img li').length) { 
+                  i=1; //这里不是i=0 
+                  $('.img').css({left:0}); //保证无缝轮播，设置left值 
+                }; 
+             
+                $('.img').stop().animate({left:-i*$('.img img').width()},300); 
+                if (i==$('.img li').length-1) {   //设置小圆点指示 
+                  $('.num li').eq(0).addClass('active').siblings().removeClass('active'); 
+                }else{ 
+                  $('.num li').eq(i).addClass('active').siblings().removeClass('active'); 
+                } 
+           }) 
+          // $('.img').on("touchend", function(e) { 
+          // //e.preventDefault(); 
+          // //e.stopPropagation(); 
+          //     moveEndX = e.originalEvent.changedTouches[0].pageX, 
+          //     X = moveEndX - startX,         
+          //     console.log(X) 
+          //     if ( X > 0 ) { 
+          //           clearInterval(timer); 
+          //       i--; 
+          //       if (i==-1) { 
+          //         i=$('.img li').length-2; 
+          //         $('.img').css({left:-($('.img li').length-1)*$('.img img').width()}); 
+          //       } 
+          //       $('.img').stop().animate({left:-i*$('.img img').width()},300); 
+          //       $('.num li').eq(i).addClass('active').siblings().removeClass('active');     
+          //     } 
+          //     else if ( X < 0 ) { 
+          //           clearInterval(timer); 
+          //       i++; 
+          //       if (i==$('.img li').length) { 
+          //         i=1; //这里不是i=0 
+          //         $('.img').css({left:0}); //保证无缝轮播，设置left值 
+          //       }; 
+             
+          //       $('.img').stop().animate({left:-i*$('.img img').width()},300); 
+          //       if (i==$('.img li').length-1) {   //设置小圆点指示 
+          //         $('.num li').eq(0).addClass('active').siblings().removeClass('active'); 
+          //       }else{ 
+          //         $('.num li').eq(i).addClass('active').siblings().removeClass('active'); 
+          //       } 
+          //     } 
+          //     return false; 
+          // });                 
+      //定时器自动播放 
+      timer=setInterval(function(){ 
+        i++; 
+        if (i==$('.img li').length) { 
+          i=1; 
+          $('.img').css({left:0}); 
+        }; 
+     
+        $('.img').stop().animate({left:-i*$('.img img').width()},500); 
+        if (i==$('.img li').length-1) {  
+          $('.num li').eq(0).addClass('active').siblings().removeClass('active'); 
+        }else{ 
+          $('.num li').eq(i).addClass('active').siblings().removeClass('active'); 
+        } 
+      },3000);
+      function resize() {
+        var body = document.getElementsByTagName('body')[0];
+        var html = document.getElementsByTagName('html')[0];
+        var width = html.clientWidth;
+        var height =  html.clientHeight;
+        var max = width > height ? width : height;
+        var min = width > height ? height : width;
+        body.style.width = max + "px";
+        body.style.height = min + "px";
+      }
+      resize();
+      window.addEventListener("resize", resize)                                    
+    }) 
+  </script>         
+</html> 

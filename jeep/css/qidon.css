@@ -1,0 +1,148 @@
+* {
+      /*初始化样式*/
+      margin: 0;
+      padding: 0;
+    }
+    a { color: #666; outline: 0; text-decoration: none; }
+    html,body{
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+      font-size: 100px;
+    }
+    body {
+      /*让 body 初始 width 和 height 就 等于 页面可视区域的 宽高*/
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+
+      /*用于 测试的 样式*/
+      background-color: #444;
+      color: #FFF;
+      letter-spacing: 4px;
+      font-size: 28px;
+      /*文字居中*/
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @media screen and (orientation:portrait) {
+      /*竖屏样式*/
+      body {
+        transform-origin: 0 0;
+        transform: rotateZ(90deg) translateY(-100%);
+        width: 100%;
+        height: 100%;
+        /* transform: rotateZ(90deg); */
+      }
+    }
+    /*测试 边边角角*/
+    div {
+      /* background-color: #F00; */
+      position: fixed;
+      /* position: relative; */
+      height: 100%;
+      width: 100%;
+    }
+    #bj{
+      background: url('../images/1.jpg');
+      /* background-repeat:repeat-x;  */
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 0 0; 
+      background-color: #000;
+      /* transform: rotate(90deg);  */
+    }
+    .modol{
+      position: absolute;   
+      /* top: 50%;   
+      left:25%;   
+      -webkit-transform: translate(-50%, -50%);   
+      -moz-transform: translate(-50%, -50%);   
+      -ms-transform: translate(-50%, -50%);   
+      -o-transform: translate(-50%, -50%);   
+      transform: translate(-50%, -50%);  
+      width: 35%;
+      height: 20%; */
+    }
+    .modol .qd{
+      position: absolute;   
+      top: 50%;   
+      left: 1.5rem;  
+      -webkit-transform: translate(-50%, -50%);   
+      -moz-transform: translate(-50%, -50%);   
+      -ms-transform: translate(-50%, -50%);   
+      -o-transform: translate(-50%, -50%);   
+      transform: translate(-50%, -50%);
+      width: 1.7rem;
+      height: 1.7rem;
+      background: url('../images/images/qd.png');
+      background-size: 100% 100%;
+      z-index: 9;
+      /* background-color: red; */
+    }
+    .modol .che{
+      position: absolute;
+      top: 50%;   
+      left: 3.8rem;   
+      -webkit-transform: translate(-50%, -50%);   
+      -moz-transform: translate(-50%, -50%);   
+      -ms-transform: translate(-50%, -50%);   
+      -o-transform: translate(-50%, -50%);   
+      transform: translate(-50%, -50%); 
+      /* width: 17%;
+      height: 15%; */
+      width: 2.4rem;
+      height: 1.1rem;
+      background: url('../images/images/che.png');
+      background-size: 100% 100%;
+    }
+/*     .modol .qd{
+      position: absolute;
+      width: 35%;
+      height: 100%;
+      background: url('../images/images/qd.png');
+      background-size: 100% 100%;
+      z-index: 999;
+    }
+    .modol .che{
+      position: absolute;
+      width:65%;
+      height: 90%;
+      margin-left: 40%;
+      margin-top: 3%;
+      background: url('../images/images/che.png');
+      background-size: 100% 100%;
+    } */
+    #jb{
+        background-color: red;
+        display: none;
+    }
+    #jb.tp{
+        margin:0 auto;
+        background-color: yellow;
+        z-index: 99;
+    }
+    .tp img{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    .se2{
+        display:none;
+    }
+    .se3{
+        display:none;
+    }
+    .se22{
+       display:none;
+    }
+    .se32{
+       display:none;
+    }
+    .se34{
+       display:none;
+    }

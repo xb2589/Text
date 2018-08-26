@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/pyq.css" />
+		<style type="text/css">
+			* {
+				margin: 0px;
+				padding: 0px;
+				font-size: 18px;
+			}
+			
+			header a:last-child {
+				display: inline-block;
+				float: right;
+				font-weight: bold;
+				font-size: 20px;
+			}
+			
+			.own {
+				width: 100%;
+				height: 200px;
+				background: red;
+			}
+			
+			.oneUser {
+				width: 100%;
+				height: 100%;
+				/*margin-top: 22px;*/
+				/*border: 1px solid seagreen;*/
+			}
+			
+			.head {
+				height: 70px;
+				width: 100%;
+				margin-top: 22px;
+				/*border: 1px solid darkgreen;*/
+			}
+			
+			.userImg {
+				display: inline-block;
+				width: 60px;
+				height: 60px;
+				margin-left: 2%;
+				border-radius: 50px;
+				vertical-align: middle;
+			}
+			
+			.username {
+				display: inline-block;
+				vertical-align: middle;
+				margin-left: 10px;
+			}
+			
+			.mui-icon-trash {
+				float: right;
+				margin-right: 5%;
+				margin-top: 4%;
+				font-size: 28px;
+				display: inline-block;
+				vertical-align: middle;
+				/*border: 1px solid red;*/
+				font-weight: bold;
+				/*margin-left: 55%;
+				border-radius: 50%;*/
+			}
+			
+			.body {
+				height: 100%;
+				width: 90%;
+				margin: auto;
+				/*border: 1px solid slateblue;*/
+			}
+			
+			.bodyContext {
+				/*border-bottom: 1px solid #BBBBBB;*/
+				padding-bottom: 5px;
+			}
+			
+			.bodyImg {
+				/*margin-left: 15px;*/
+				margin-left: 1%;
+				margin-top: 8px;
+			}
+			
+			.foot {
+				/*border: 1px solid #6641E2;*/
+				height: 100%;
+			}
+			
+			.thumb {
+				width: 90%;
+				margin: auto;
+				height: 100%;
+				margin-top: 3px;
+				/*border: 1px solid gold;*/
+			}
+			
+			sw {
+				margin-left: 2%;
+				color: deepskyblue;
+			}
+			
+			.comments {
+				width: 90%;
+				margin: auto;
+				height: 100%;
+				position: relative;
+				/*border: 1px hotpink solid;*/
+			}
+			
+			.iconBox {
+				width: 90%;
+				margin: auto;
+				border-bottom: 1px solid #C0C0C0;
+				height: 35px;
+			}
+			
+			.iconBox font {
+				float: right;
+				margin-left: 3%;
+				font-size: 25px;
+			}
+			
+			.msgInput {
+				width: 81%;
+				height: 34px;
+			}
+			
+			.oneMsg {
+				/*border: 1px solid red;*/
+			}
+			
+			.oneMsgInput {
+				width: 81%;
+				height: 34px;
+			}
+			
+			.msgArea {
+				/*border: 1px solid red;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="pullrefresh" class="mui-slider">
+				<div class="mui-slider-group mui-slider-loop">
+					<!--支持循环，需要重复图片节点-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="images/4.jpg" /></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/2.jpg" /></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/3.jpg" /></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="images/4.jpg" /></a>
+					</div>
+					<!--支持循环，需要重复图片节点-->
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="images/1.jpg" /></a>
+					</div>
+				</div>
+				<div class="My_information">
+					<img src="images/1.jpg" />
+					<span>用户名</span>
+				</div>
+				<div class="friend_information">
+					<ul>
+					</ul>
+				</div>
+				<script type="text/javascript" src="js/ip.js"></script>
+				<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+				<script type="text/javascript">
+					$(document).ready(function() {
+						mui.plusReady(function() {
+							mui.init({
+								gestureConfig: {
+									tap: true, //默认为true
+									doubletap: true, //默认为false
+									longtap: true, //默认为false
+									swipe: true, //默认为true
+									drag: false, //默认为true
+									hold: false, //默认为false，不监听
+									release: false //默认为false，不监听
+								}
+							});
+							window.addEventListener("pageflowrefresh", function(e) {
+								location.reload();
+							});
+							var cur = plus.webview.currentWebview();
+							$(".My_information span").html(cur.user);
+							mui('body').on('tap', '.mui-icon-plus', function() {
+								// 发布
+								//							alert(cur.userId);
+								mui.openWindow({
+									url: "upload.html",
+									id: "upload",
+									extras: {
+										user: cur.user,
+										userId: cur.userId
+									}
+								})
+							});
+							//获得slider插件对象
+							var gallery = mui('.mui-slider');
+							gallery.slider({
+								interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+							});
+							//http://101.132.167.44:8080/advisory/circle/findAllCircleof.do
+							mui.ajax({
+								url: 'http://' + ip + ':8080/CircleOfFriends/circle/findAllCircleof.do',
+								type: 'get',
+								dataType: 'json',
+								success: function(data) {
+									var arr = data.extendList;
+									arr = arr.reverse();
+									for(var i in arr) {
+										var li = $("<li></li>");
+										$("ul").append(li);
+										$(li).append(function() {
+											// 头像 + 用户名
+											var head = $('<div class="head"></div>');
+											// --头像
+											var img = $('<img class="userImg" />');
+											img.attr('src', "data:image/jpeg;base64," + arr[i]['circleBase64'].split(',')[0]);
+											head.append(img);
+											// --用户名
+											var username = $('<font class="username">' + arr[i]['user'] + '</font>');
+											head.append(username);
+											//									oneUser.append(head);
+											// -- 删除此条
+											if(arr[i]['user'] == cur.user) {
+												var del = $('<font class="mui-icon mui-icon-trash"></font>');
+												del.attr('id', arr[i]['cfriendsId']);
+												head.append(del);
+											}
+
+											// 内容 
+											var body = $('<div class="body" ></div>');
+											var bodyContext = $('<div class="bodyContext"></div>');
+											bodyContext.html(arr[i]['content']);
+											body.append(bodyContext);
+											var imgs = arr[i]['circleBase64'].split(',');
+											console.log(imgs);
+											for(var j = 0; j < imgs.length; j++) {
+												var bodyImg = $('<img class="bodyImg" />');
+												bodyImg.attr('src', 'data:image/jpeg;base64,' + imgs[j]);
+												body.append(bodyImg);
+											}
+											//oneUser.append(body);
+											// 点赞 + 评论
+											var foot = $('<div class="foot" ></div>');
+											// 图标
+											var iconBox = $('<div class="iconBox"></div>');
+											var star = $("<font class='mui-icon-star icon iconfont icon-dianzan' title='点赞'></font>");
+											var chatboxes = $("<font class='mui-icon mui-icon-chatboxes icon iconfont icon-pinglun' title='评论'></font>");
+											var redo = $("<font class='mui-icon mui-icon-redo icon iconfont icon-zhuanfa' title='转发'></font>");
+											var cId = $('<h1 hidden="hidden">' + arr[i]['cfriendsId'] + '</h1>');
+											foot.append(cId);
+											iconBox.append(redo);
+											iconBox.append(chatboxes);
+											iconBox.append(star);
+											foot.append(iconBox);
+											// 点赞 
+											var thumb = $('<div class="thumb iconfont icon-dianzan"></div>');
+											var thumbData = {
+												cFriendsId: foot.find('h1').html()
+											}
+											whoThumb(thumbData, function(data) {
+												for(var j = 0; j < data.length; j++) {
+													thumb.append("<sw class=" + data[j]['user'] + ">" + data[j]['user'] + "</sw>");
+
+												}
+											})
+											foot.append(thumb);
+											// 评论
+											var comments = $('<div class="comments"></div>');
+											//comments.append($('<div>全部评论</div>'))
+											var cFriendsId = arr[i]['cfriendsId'];
+											whoGiveMsg(cFriendsId, function(data) {
+												//console.log(data);
+												var msgArr = data['extendList'];
+												for(var j = 0; j < msgArr.length; j++) {
+
+													var revertArr = msgArr[j]['reverts'];
+
+													var oneMsg = $('<div class="oneMsg"></div>');
+													comments.append(oneMsg);
+													var art = $("<div class='art'></div>");
+													oneMsg.append(art)
+													art.append($('<h1 hidden="hidden">' + msgArr[j]['tMid'] + '</h1>'));
+													art.append($('<a href="#">' + msgArr[j]['user'] + '</a>'));
+													art.append(" : ");
+													art.append(msgArr[j]['tMcontent']);
+													art.append($('<br/>'));
+													for(var k = 0; k < revertArr.length; k++) {
+														var art = $("<div class='art'></div>");
+														oneMsg.append(art)
+														art.append($('<h1 hidden="hidden">' + msgArr[j]['tMid'] + '</h1>'));
+														art.append($('<a href="#">' + revertArr[k]['rmuser'] + '</a>'));
+														art.append(" : ");
+														art.append('回复');
+														art.append($('<a href="#">' + revertArr[k]['ruser'] + '</a>'));
+														art.append(" : ");
+														art.append(revertArr[k]['rMrevert']);
+														art.append($('<br/>'));
+													}
+												}
+											})
+											foot.append(comments);
+											//									oneUser.append(foot);
+
+											$(this).append(head)
+											$(this).append(body);
+											$(this).append(foot);
+										})
+									} // end for
+								} // end success
+							}); // end ajax
+
+							// 删除此条
+							mui('body').on('tap', '.mui-icon-trash', function() {
+								var lt = $(this).prev(".username").html();
+								var di = $(this).attr('id');
+								var isConfirm = confirm("您确定要删除此条记录吗？");
+								if(isConfirm) {
+									$(this).parent().parent().remove();
+									//								mui.ajax({
+									//									url: 'http://' + ip + ':8080/CircleOfFriends/circle/delete.do',
+									//									type: 'get',
+									//									dataType: 'json',
+									//									data: {
+									//										id: di
+									//									},
+									//									success: function(data) {
+									//										if(data.code == 100) {
+									//											mui.toast('删除成功');
+									//											$(this).parent().parent().remove();
+									////											location.reload();
+									//										} else {
+									//											mui.toast('删除失败');
+									//										}
+									//									}
+									//
+									//								})
+								} else {
+									mui.toast('您取消了此次操作');
+								}
+							}); // end .mui-icon-trash tap
+
+							var revertFlag = 0;
+
+							// 回复评论
+							mui('body').on('tap', '.art', function(event) {
+								var sru = $(this).find("a").html();
+
+								//alert(sru)
+								revertFlag++;
+								if(revertFlag % 2 != 0) {
+									var revertBox = $('<div class="revertBox"></div>');
+									revertBox.insertAfter($(this));
+									if(sru == cur.user) {
+										$('.revertBox').remove();
+									}
+									var oneMsgInput = $('<input class="oneMsgInput" placeholder="回复评论" />');
+									var oneMsgBtn = $('<button id="huifu" class="mui-btn mui-btn-blue mui-btn-outlined">发送</button>');
+									revertBox.append(oneMsgInput);
+									revertBox.append(oneMsgBtn);
+
+									mui(this)[0].nextSibling.lastChild.addEventListener('tap', function() {
+										var is = this;
+										var rmuser = cur.user;
+										var rmuserId = cur.userId;
+										var tMid = $(this).parent().prev().find('h1').html();
+										var ruser = $(this).parent().prev().find('a').html();
+										var rMrevert = $(this).prev().val();
+										//alert(tMid);
+										//									alert(ruser);
+										//									alert(rMrevert);
+										//									alert(rMrevert)
+										if(rMrevert != " " && rMrevert != null) {
+											var revertData = {
+												ruserId: rmuserId, //回复者Id
+												tMid: tMid, //评论表ID
+												rMrevert: rMrevert, //回复内容
+												ruser: ruser, // 被回复折姓名
+												rmuserId: rmuserId, // 当前那用户Id
+												rmuser: rmuser, // 当前用户名
+											}
+											mui.ajax({
+												url: 'http://' + ip + ':8080/CircleOfFriends/revert/insertRevert.do',
+												data: revertData,
+												dataType: 'json',
+												type: 'get',
+												success: function(backData) {
+													if(backData.code == 100) {
+														mui.toast('回复成功');
+														$('.revertBox').hide();
+														var art = $("<div class='art'></div>");
+														art.append($('<h1 hidden="hidden">' + tMid + '</h1>'));
+														art.append($('<a href="#">' + rmuser + '</a>'));
+														art.append(" : ");
+														art.append('回复');
+														art.append($('<a href="#">' + ruser + '</a>'));
+														art.append(" : ");
+														art.append(rMrevert);
+														art.append($('<br/>'));
+														//													location.reload();
+														$(is).parent().parent().append(art);
+														$('.revertBox').remove();
+													} else {
+														mui.toast('回复失败');
+													}
+												} // end button tap ajax success
+											}) // end button tap ajax
+										} else {
+											alert("不能为空")
+										}
+
+									}); // end button tap
+								} else {
+									$('.revertBox').remove();
+								}
+							})
+							// 所有评论
+							var whoGiveMsg = function(cFriendsId, cb) {
+								var msgSendData = {
+									cFriendsId: cFriendsId
+								}
+								mui.ajax({
+									url: 'http://' + ip + ':8080/CircleOfFriends/tmessage/selectMessage.do',
+									data: msgSendData,
+									dataType: 'json',
+									type: 'get',
+									success: function(msgBackData) {
+										if(msgBackData.code == 100) {
+											cb(msgBackData);
+										}
+									} // end whoGiveMsg ajax success
+								}) // end whoGiveMsg ajax
+							} // end whoGiveMsg
+							// 转发
+							mui('body').on('tap', '.mui-icon-redo', function() {
+								//							var cfId = $(this).parent().parent().parent().attr('id');
+								var cfriendsId = $(this).parent().prev().html();
+								mui.openWindow({
+
+									url: "forward.html",
+									id: "forward",
+									extras: {
+										user: cur.user,
+										userId: cur.userId,
+										cfriendsId: cfriendsId,
+									}
+								})
+
+							}); // end redo tap
+							var chatBoxFlag = 0;
+							// 评论
+							mui('body').on('doubletap', 'body', function() {
+								alert(123);
+								if(chatBoxFlag % 2 == 0) {
+									chatBoxFlag = 1;
+								}
+							})
+							mui('body').on('tap', '.mui-icon-chatboxes', function() {
+
+								chatBoxFlag++;
+
+								if(chatBoxFlag % 2 != 0) {
+									//var cfId = $(this).parent().parent().parent().attr('id');
+									var tMid = $(this).parent().next().next().find('h1').html();
+									var ts = $(this);
+									var cfriendsId = $(this).parent().prev().html();
+									var msgArea = $('<div class="msgArea" ></div>');
+									var msgBtn = $('<button class="mui-btn mui-btn-outlined confirmBtn mui-btn-primary">发送</button>');
+									var msgInput = $('<input class="msgInput" placeholder="评论"/>');
+									$(this).parent().next().next().append(msgArea);
+									msgArea.append(msgInput);
+									msgArea.append(msgBtn);
+									mui("body").on('tap', ".confirmBtn", function() {
+										var tMcontent = $(this).parent().find('input').val();
+										$(this).parent().hide();
+										var msgData = {
+											cFriendsId: cfriendsId,
+											userId: cur.userId,
+											tMcontent: tMcontent,
+											user: cur.user
+										}
+										mui.ajax({
+											url: 'http://' + ip + ':8080/CircleOfFriends/tmessage/insertMessage.do',
+											type: 'get',
+											data: msgData,
+											dataType: 'json',
+											success: function(cbMsgData) {
+												//											alert(cbMsgData);
+												//											console.log(cbMsgData);
+												if(cbMsgData.code == 100) {
+													mui.toast('评论成功');
+													var oneMsg = $('<div class="oneMsg"></div>');
+													var art = $("<div class='art'></div>");
+													art.append($('<h1 hidden="hidden">' + tMid + '</h1>'));
+													art.append($('<a href="#">' + cur.user + '</a>'));
+													art.append(" : ");
+													art.append(tMcontent);
+													art.append($('<br/>'));
+													oneMsg.append(art)
+													$(ts).parent().next().next().append(oneMsg);
+													//												location.reload();
+												} else {
+													mui.toast('网络故障');
+												}
+											} // end msgBtn tap ajax success
+										}); // end msgBtn tap ajax
+									}); // end msgBtn tap	
+								} else {
+									$(this).parent().next().next().find('.msgArea').remove();
+								}
+							}) // end mui-icon-redo taps
+							// 所有点赞的人
+							var whoThumb = function(thumbData, cb) {
+								mui.ajax({
+									url: 'http://' + ip + ':8080/CircleOfFriends/thumb/whoThumb.do',
+									data: thumbData,
+									type: 'get',
+									dataType: 'json',
+									success: function(data) {
+										if(data.extendList.length > 0) {
+											cb(data.extendList);
+										}
+									} // end whoThumb ajax success
+								})
+							} // end whoThumb
+							mui('body').on('tap', '.mui-icon-star', function() {
+								var is = $(this);
+								var user = cur.user;
+								var userId = cur.userId;
+								var cfriendsId = $(this).parent().prev().html();
+								var dz = $(this).parent().next().html();
+								if(dz.indexOf(user) >= 0) {
+									alert("含有此字符串");
+									$("." + user).remove();
+									var startData = {
+										user: user,
+										cFriendsId: cfriendsId
+									};
+									mui.ajax({
+										url: 'http://' + ip + ':8080/CircleOfFriends/thumb/deleteDZ.do',
+										data: startData,
+										type: 'get',
+										dataType: 'json',
+										success: function(data) {
+											if(data.code == 100) {
+												alert(user);
+											} else {
+												mui.toast('网络故障');
+											}
+										}
+									})
+								} else {
+									alert("没有此字符串");
+									var startData = {
+										user: user,
+										userId: userId,
+										cFriendsId: cfriendsId
+									};
+									mui.ajax({
+										url: 'http://' + ip + ':8080/CircleOfFriends/thumb/giveStart.do',
+										data: startData,
+										type: 'get',
+										dataType: 'json',
+										success: function(data) {
+											//alert(data);
+											//console.log(data);
+											if(data.code == 100) {
+												mui.toast('点赞成功');
+												$(is).parent().next().append("<sw class=" + user + ">" + user + "</sw>");
+											} else {
+												mui.toast('网络故障');
+											}
+										} // end start ajax success
+									}) // end start ajax
+								}
+
+							}); // end mui-icon-star tap					
+						}); // end mui
+					}); // end jquery
+					window.onload;
+				</script>
+	</body>
+
+</html>

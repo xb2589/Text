@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dao.CircleOfFriendsDao">
+
+	<resultMap type="circleOfFriends" id="rmcircleOfFriends">
+	
+	</resultMap>
+
+	<!-- 发表  -->
+	<insert id="uploadImage" useGeneratedKeys="true" keyProperty="cfriendsId" parameterType="circleOfFriends" >
+		insert into circleoffriends values (default,#{forward},#{content},#{circleImgs},#{circleBase64},#{userId},#{user},#{place})
+	</insert>
+	
+	<!-- 查看所有  -->
+	<select id="findAllCircleof" resultMap="rmcircleOfFriends">
+		select * from circleoffriends
+	</select>
+	
+	<!-- 查询单个 -->
+	<select id="selectById" resultMap="rmcircleOfFriends" parameterType="circleOfFriends" >
+		select * from circleoffriends where cfriendsId = #{cfriendsId}
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="delete">
+		delete from circleoffriends where cfriendsId = #{cfriendsId}
+	</delete>
+	
+</mapper>

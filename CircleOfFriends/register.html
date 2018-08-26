@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">注册</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>用户名</label>
+					<input type="text" id="name" class="mui-input-clear" placeholder="请输入用户名">
+				</div>
+				<div class="mui-input-row">
+					<label>密码</label>
+					<input type="password" id="password" class="mui-input-password" placeholder="请输入密码">
+				</div>
+				<div class="mui-input-row">
+					<label>确认密码</label>
+					<input type="password" id="repassword" class="mui-input-password" placeholder="请输入密码">
+				</div>
+				<div class="mui-button-row">
+					<button type="button" id="reg" class="mui-btn mui-btn-primary">注 &nbsp; &nbsp; 册</button>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="js/ip.js"></script>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				mui.plusReady(function() {
+					$('#name').blur(function() {
+						var name = $('#name').val();
+						mui.ajax('http://'+ ip +':8080/CircleOfFriends/user/isRepeat.do', {
+							data: {
+								user: name
+							},
+							dataType: 'json', //服务器返回json格式数据
+							type: 'get', //HTTP请求类型
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							success: function(data) {
+								//判断是否存在用户；
+								if(data.code == 200) {
+									mui.alert("用户名已经存在,请重新输入！", "尊敬的用户您好！");
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理；
+								console.log(type);
+							}
+						});
+					})
+				});
+				$("#password").blur(function() {
+					var name = $('#name').val();
+					var password = $("#password").val();
+					var repassword = $("#repassword").val();
+					if(password == "") {
+						mui.alert('密码不能为空哦！', '尊敬的用户，您好！');
+					}
+				})
+				$("#repassword").blur(function() {
+					var name = $('#name').val();
+					var password = $("#password").val();
+					var repassword = $("#repassword").val();
+					if(repassword == "") {
+						mui.alert('确认密码不能为空哦！', '尊敬的用户，您好！');
+					} else if(password != repassword) {
+						mui.alert('二次密码不一致,请重新输入！', '尊敬的用户，您好！');
+					}
+				});
+				mui('body').on('tap', '#reg', function() {
+					var user = document.getElementById("name").value;
+					var password = document.getElementById("password").value;
+					var repassword = $("#repassword").val();
+					if(user == "") {
+						mui.alert('用户名不能为空哦！', '尊敬的用户，您好！');
+					} else if(password == "") {
+						mui.alert('密码不能为空哦！', '尊敬的用户，您好！');
+					} else if(repassword == "") {
+						mui.alert('确认密码不能为空哦！', '尊敬的用户，您好！');
+					} else if(password != repassword) {
+						mui.alert('二次密码不一致,请重新输入！', '尊敬的用户，您好！');
+					} else {
+						mui.alert('注册成功！', '尊敬的用户，您好！');
+						mui.ajax(
+							'http://'+ ip +':8080/CircleOfFriends/user/register.do', {
+								data: {
+									user: user,
+									password: password
+								},
+								dataType: 'json',
+								type: 'get',
+								success: function() {
+									mui.openWindow({
+										url: 'login.html',
+										id: 'login'
+									})
+								}
+							})
+					}
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

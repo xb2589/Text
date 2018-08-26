@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/iconfont.css" /> />
+		<link rel="stylesheet" href="css/pyq.css" />
+		<style type="text/css">
+			#content {
+				margin-top: 20px;
+			}
+			
+			#title,
+			#title textarea {
+				width: 100%;
+				height: 100px;
+				border: 1px solid #ccc;
+			}
+			
+			.forImg {
+				margin-top: 30px;
+				width: 100px;
+				height: 100px;
+				border: 1px solid #ccc;
+				display: inline-block;
+				margin-right: 16px;
+			}
+			
+			.forImg .mui-icon-plusempty {
+				width: 100px;
+				height: 100px;
+				font-size: 100px;
+				color: #ccc;
+				position: relative;
+			}
+			
+			#content button {
+				display: inline-block;
+				margin-left: 40%;
+				margin-top: 20px;
+			}
+			
+			.img1 {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" style="background-color: #222222;">
+			<a class="mui-icon back mui-pull-left" style="color: #FFFFFF;">取消</a>
+			<a class="mui-icon mui-pull-right" id="publish" style="color: #4CD964;">发表</a>
+		</header>
+		<div class="mui-content">
+			<div id="content">
+				<div class="clearfix marquee">
+					<textarea id="ctx"></textarea>
+					<div class="clearfix marquee_i">
+
+						<span class="icon iconfont2 icon-tianjiatupian"></span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script type="text/javascript" src="js/ip.js" ></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				//				var zipimg; // 压缩
+				var fullPath; // 路径
+				//				b64.length = 1;
+				$('body').on("tap",".back",function(){
+					var isConfirm = confirm("您确定要取消此次操作？");
+					if(isConfirm==true){
+						mui.back();
+					}
+				});
+				mui.plusReady(function() {
+					mui('body').on('tap', '.icon-tianjiatupian', function() {
+						showActionSheet();
+					});
+				});
+				//选取图片的来源，拍照和相册  
+				function showActionSheet() {
+					var actionbuttons = [{
+						title: "拍照"
+					}, {
+						title: "相册选取"
+					}];
+					var actionstyle = {
+						cancel: "取消",
+						buttons: actionbuttons
+					};
+					plus.nativeUI.actionSheet(actionstyle, function(e) {
+						if (e.index == 1) {
+							captureImage();
+						} else if (e.index == 2) {
+							//							galleryImg(divid);
+							galleryImg();
+						}
+					});
+				}
+
+				function galleryImg() {
+					plus.gallery.pick(function(e) {
+						var zm = 0;
+						setTimeout(file, 200);
+						function file() {
+							plus.io.resolveLocalFileSystemURL(e.files[zm], function(entry) {
+								var imgs = $('<img id="img"/>');
+								$('.marquee_i').prepend(imgs);
+								document.getElementById("img").src = entry.toLocalURL();
+							}, function(e) {
+								plus.nativeUI.toast("读取拍照文件错误：" + e.message);
+							});
+							zm++;
+							if (zm < e.files.length) {
+								setTimeout(file, 200);
+							}
+						}
+					}, function(e) {
+						console.log("取消选择图片");
+					}, {
+						filename: "_doc/camera/",
+						filter: "image",
+						multiple: true
+					});
+				}
+
+				function captureImage() {
+					//获得摄像头
+					var cmr = plus.camera.getCamera();
+					cmr.captureImage(function(path) {
+							//路径转换
+							plus.io.resolveLocalFileSystemURL(path, function(entry) {
+								fullPath = entry.fullPath;
+								var imgs = $('<img id="img"/>');
+								$('.marquee_i').prepend(imgs);
+								document.getElementById("img").src = fullPath;
+								// before is zipping
+								// 
+							}, function() {
+								alert("拍照失败");
+							});
+						},
+						function(error) {
+							alert("Capture image failed: " + error.message);
+						}
+					);
+				} //endCap
+				// 图片压缩
+				var b64 = [];
+				zipimg = function(path, cb) {
+					// 获得b64 
+					// 压缩图片
+					var ie = document.createElement('img');
+					ie.src = path;
+					ie.onload = function() {
+						var scale = this.width / this.height;
+						var width = 100;
+						var height = width / scale;
+						// canvas : 画一张图片
+						var canvas = document.createElement('canvas');
+						var ctx = canvas.getContext('2d');
+						canvas.width = width;
+						canvas.height = height;
+						ctx.drawImage(this, 0, 0, width, height);
+						// 返回 b6zz																						
+						var bItem = canvas.toDataURL("image/jpeg", "0.6");
+						cb(bItem);
+					}
+				}
+				mui('body').on('tap', '#publish', function() {
+					var bList = [];
+					var user = plus.webview.currentWebview().user;
+					var userId = plus.webview.currentWebview().userId;
+					var content = document.getElementById("ctx").value;
+					var cfriendId = plus.webview.currentWebview().cfriendsId;
+					if ($('img').length > 0) {
+						for (var k = 0; k < $('img').length; k++) {
+							var fullPath = $('img').eq(k).attr('src');
+							(function(arg) {
+								zipimg(fullPath, function(bItem) {
+									bList.push(bItem);
+									if (arg == $('img').length - 1) {
+//											console.log(b64);
+											if (bList != null) {
+												var base = JSON.stringify(bList)
+											}
+											mui.ajax({
+												url: "http://" + ip + ":8080/CircleOfFriends/circle/uploadImage.do",
+												type: 'post',
+												data: {
+													user: user,
+													userId: userId,
+													circleBase64: base,
+													base64List: bList,
+													content: content
+												},
+												dataType: 'json',
+												success: function(backData) {
+														if (backData.code == 100) {
+															mui.toast('发表成功！');
+															mui.openWindow({
+																url: 'index.html',
+																id: 'index'
+															})
+															var list = plus.webview.currentWebview().opener();
+															//触发父页面的自定义事件(refresh),从而进行刷新
+															mui.fire(list, 'pageflowrefresh');
+															//返回true,继续页面关闭逻辑
+															return true;
+															plus.webview.getWebviewById('upload').reload(true);
+															//										window.location.href = "index.html";
+														} else {
+															mui.toast('发表失败，您可以重新发表');
+														}
+													} // 
+											});
+//										}
+									}
+								})
+							})(k)
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>
